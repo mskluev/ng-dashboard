@@ -2,5 +2,130 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ng-dashboard": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/ng-dashboard",
+      "sourceRoot": "projects/ng-dashboard/src",
+      "prefix": "msk",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-dashboard",
+            "index": "projects/ng-dashboard/src/index.html",
+            "main": "projects/ng-dashboard/src/main.ts",
+            "polyfills": "projects/ng-dashboard/src/polyfills.ts",
+            "tsConfig": "projects/ng-dashboard/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ng-dashboard/src/favicon.ico",
+              "projects/ng-dashboard/src/assets"
+            ],
+            "styles": [
+              "projects/ng-dashboard/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-dashboard/src/environments/environment.ts",
+                  "with": "projects/ng-dashboard/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-dashboard:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-dashboard:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-dashboard:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-dashboard/src/test.ts",
+            "polyfills": "projects/ng-dashboard/src/polyfills.ts",
+            "tsConfig": "projects/ng-dashboard/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-dashboard/karma.conf.js",
+            "assets": [
+              "projects/ng-dashboard/src/favicon.ico",
+              "projects/ng-dashboard/src/assets"
+            ],
+            "styles": [
+              "projects/ng-dashboard/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-dashboard/tsconfig.app.json",
+              "projects/ng-dashboard/tsconfig.spec.json",
+              "projects/ng-dashboard/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ng-dashboard/e2e/protractor.conf.js",
+            "devServerTarget": "ng-dashboard:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-dashboard:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ng-dashboard"
 }

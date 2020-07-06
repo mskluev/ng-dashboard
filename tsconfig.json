@@ -6,5 +6,15 @@
 */
 {
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./projects/ng-dashboard/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ng-dashboard/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-dashboard/e2e/tsconfig.json"
+    }
+]
 }
